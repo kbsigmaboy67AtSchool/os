@@ -1,0 +1,132 @@
+/* Window Manager — Windows 11 style */
+
+.window-host {
+  position: fixed;
+  inset: 0;
+  bottom: var(--taskbar-h);
+  z-index: 100;
+  pointer-events: none;
+}
+.window-host > * { pointer-events: auto; }
+
+.app-window {
+  position: absolute;
+  min-width: 320px;
+  min-height: 200px;
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: box-shadow 0.15s;
+}
+.app-window.focused {
+  box-shadow: 0 12px 48px rgba(0,0,0,0.55), 0 0 0 1px rgba(96,205,255,0.25);
+  z-index: 200 !important;
+}
+.app-window.maximized {
+  inset: 0 !important;
+  width: auto !important;
+  height: auto !important;
+  border-radius: 0;
+  border: none;
+}
+.app-window.minimized {
+  display: none !important;
+}
+
+/* Title bar */
+.win-titlebar {
+  height: 36px;
+  display: flex;
+  align-items: center;
+  padding: 0 0 0 12px;
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+  cursor: default;
+  user-select: none;
+}
+.win-titlebar .win-icon {
+  width: 18px; height: 18px;
+  font-size: 14px;
+  margin-right: 8px;
+  display: grid;
+  place-items: center;
+}
+.win-titlebar .win-title {
+  flex: 1;
+  font-size: 12px;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--text-secondary);
+}
+.app-window.focused .win-title { color: var(--text); }
+
+.win-controls {
+  display: flex;
+  height: 100%;
+}
+.win-ctrl {
+  width: 46px;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  font-size: 10px;
+  color: var(--text-secondary);
+  transition: background 80ms, color 80ms;
+}
+.win-ctrl:hover { background: rgba(255,255,255,0.1); color: var(--text); }
+.win-ctrl.close:hover { background: #e81123; color: #fff; }
+
+/* Body */
+.win-body {
+  flex: 1;
+  min-height: 0;
+  position: relative;
+  overflow: hidden;
+  background: var(--bg);
+}
+.win-body iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: #fff;
+  display: block;
+}
+.win-body .app-content {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+
+/* Resize handles */
+.resize-handle {
+  position: absolute;
+  z-index: 10;
+}
+.resize-handle.n  { top: 0; left: 8px; right: 8px; height: 4px; cursor: ns-resize; }
+.resize-handle.s  { bottom: 0; left: 8px; right: 8px; height: 4px; cursor: ns-resize; }
+.resize-handle.e  { right: 0; top: 8px; bottom: 8px; width: 4px; cursor: ew-resize; }
+.resize-handle.w  { left: 0; top: 8px; bottom: 8px; width: 4px; cursor: ew-resize; }
+.resize-handle.ne { top: 0; right: 0; width: 10px; height: 10px; cursor: nesw-resize; }
+.resize-handle.nw { top: 0; left: 0; width: 10px; height: 10px; cursor: nwse-resize; }
+.resize-handle.se { bottom: 0; right: 0; width: 10px; height: 10px; cursor: nwse-resize; }
+.resize-handle.sw { bottom: 0; left: 0; width: 10px; height: 10px; cursor: nesw-resize; }
+
+/* Snap layouts hint (hover maximize) */
+.snap-preview {
+  position: absolute;
+  background: rgba(96,205,255,0.25);
+  border: 2px solid var(--accent);
+  border-radius: var(--radius);
+  pointer-events: none;
+  z-index: 300;
+  opacity: 0;
+  transition: opacity 0.1s;
+}
+.snap-preview.show { opacity: 1; }
