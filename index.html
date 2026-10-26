@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <meta name="description" content="n3xn OS — Windows 11–style virtual operating system with true URL cloaking, WASM acceleration, and full desktop experience" />
+  <title>n3xn OS</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230078D4'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-size='22' font-family='Segoe UI,system-ui' fill='white' font-weight='600'%3En3%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="css/fluent.css" />
+  <link rel="stylesheet" href="css/desktop.css" />
+  <link rel="stylesheet" href="css/windows.css" />
+  <link rel="stylesheet" href="css/apps.css" />
+</head>
+<body>
+  <!-- Boot splash -->
+  <div id="boot" class="boot">
+    <div class="boot-logo">
+      <svg viewBox="0 0 88 88" width="72" height="72" aria-hidden="true">
+        <rect x="0" y="0" width="40" height="40" rx="4" fill="#0078D4"/>
+        <rect x="48" y="0" width="40" height="40" rx="4" fill="#0078D4"/>
+        <rect x="0" y="48" width="40" height="40" rx="4" fill="#0078D4"/>
+        <rect x="48" y="48" width="40" height="40" rx="4" fill="#0078D4"/>
+      </svg>
+    </div>
+    <div class="boot-spinner"></div>
+    <div class="boot-text">n3xn OS</div>
+  </div>
+
+  <!-- Desktop background -->
+  <div id="desktop-bg" class="desktop-bg">
+    <div class="desktop-dim"></div>
+  </div>
+
+  <!-- Main OS shell -->
+  <div id="os" class="os hidden">
+    <!-- Desktop area (icons + free space) -->
+    <div id="desktop" class="desktop"></div>
+
+    <!-- Taskbar -->
+    <div id="taskbar" class="taskbar">
+      <div class="taskbar-center">
+        <button class="tb-btn" id="btn-start" title="Start" aria-label="Start">
+          <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M3 3h8v8H3V3zm10 0h8v8h-8V3zM3 13h8v8H3v-8zm10 0h8v8h-8v-8z"/></svg>
+        </button>
+        <button class="tb-btn" id="btn-search" title="Search" aria-label="Search">
+          <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+        </button>
+        <button class="tb-btn" id="btn-widgets" title="Widgets" aria-label="Widgets">
+          <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M4 4h6v6H4V4zm10 0h6v6h-6V4zM4 14h6v6H4v-6zm10 0h6v6h-6v-6z"/></svg>
+        </button>
+        <div id="taskbar-pinned" class="taskbar-pinned"></div>
+      </div>
+      <div class="taskbar-right">
+        <div id="tray" class="tray">
+          <button class="tray-btn" id="btn-network" title="Network">📶</button>
+          <button class="tray-btn" id="btn-volume" title="Volume">🔊</button>
+          <button class="tray-btn" id="btn-battery" title="Battery">🔋</button>
+        </div>
+        <button class="clock-btn" id="btn-clock" title="Date and time">
+          <div id="clock-time">--:--</div>
+          <div id="clock-date">---</div>
+        </button>
+        <button class="tb-btn show-desktop" id="btn-show-desktop" title="Show desktop"></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Start Menu -->
+  <div id="start-menu" class="start-menu hidden" role="dialog" aria-label="Start menu">
+    <div class="start-inner">
+      <div class="start-search">
+        <input type="search" id="start-search" placeholder="Search for apps, settings, and documents" autocomplete="off" />
+      </div>
+      <div class="start-section">
+        <div class="start-section-head">
+          <span>Pinned</span>
+          <button class="link-btn" id="btn-all-apps">All apps ›</button>
+        </div>
+        <div id="pinned-grid" class="pinned-grid"></div>
+      </div>
+      <div class="start-section">
+        <div class="start-section-head"><span>Recommended</span></div>
+        <div id="recommended-list" class="recommended-list"></div>
+      </div>
+      <div class="start-footer">
+        <button class="user-btn" id="btn-user">
+          <span class="user-avatar">👤</span>
+          <span class="user-name">User</span>
+        </button>
+        <button class="power-btn" id="btn-power" title="Power">⏻</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Search flyout -->
+  <div id="search-flyout" class="search-flyout hidden">
+    <input type="search" id="global-search" placeholder="Type here to search" />
+    <div id="search-results" class="search-results"></div>
+  </div>
+
+  <!-- Widgets panel -->
+  <div id="widgets-panel" class="widgets-panel hidden">
+    <div class="widgets-head">Widgets</div>
+    <div class="widget-card">
+      <div class="widget-title">Weather</div>
+      <div id="widget-weather">Loading…</div>
+    </div>
+    <div class="widget-card">
+      <div class="widget-title">Clock</div>
+      <div id="widget-clock" class="widget-clock">--:--</div>
+    </div>
+  </div>
+
+  <!-- Window host -->
+  <div id="window-host" class="window-host"></div>
+
+  <!-- Context menu -->
+  <div id="ctx-menu" class="ctx-menu hidden" role="menu"></div>
+
+  <!-- Toasts -->
+  <div id="toasts" class="toasts"></div>
+
+  <!-- Settings overlay (full Settings app is a window) -->
+  <div id="modal-root"></div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
