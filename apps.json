@@ -1,0 +1,152 @@
+{
+  "version": 2,
+  "apps": [
+    {
+      "id": "app-browser",
+      "name": "Microsoft Edge",
+      "icon": "🌐",
+      "type": "browser",
+      "shelf": true,
+      "pinned": true,
+      "desktop": true
+    },
+    {
+      "id": "app-explorer",
+      "name": "File Explorer",
+      "icon": "📁",
+      "type": "explorer",
+      "shelf": true,
+      "pinned": true,
+      "desktop": true
+    },
+    {
+      "id": "app-settings",
+      "name": "Settings",
+      "icon": "⚙️",
+      "type": "settings",
+      "shelf": false,
+      "pinned": true,
+      "desktop": false
+    },
+    {
+      "id": "app-notepad",
+      "name": "Notepad",
+      "icon": "📝",
+      "type": "notepad",
+      "shelf": false,
+      "pinned": true,
+      "desktop": true
+    },
+    {
+      "id": "app-calculator",
+      "name": "Calculator",
+      "icon": "🧮",
+      "type": "calculator",
+      "shelf": false,
+      "pinned": true,
+      "desktop": false
+    },
+    {
+      "id": "app-chatgpt",
+      "name": "ChatGPT",
+      "icon": "🤖",
+      "type": "web",
+      "url": "https://chatgpt.com",
+      "cloak": true,
+      "shelf": false,
+      "pinned": true
+    },
+    {
+      "id": "app-claude",
+      "name": "Claude",
+      "icon": "✦",
+      "type": "web",
+      "url": "https://claude.ai",
+      "cloak": true,
+      "shelf": false,
+      "pinned": false
+    },
+    {
+      "id": "app-youtube",
+      "name": "YouTube",
+      "icon": "▶️",
+      "type": "web",
+      "url": "https://www.youtube.com",
+      "cloak": true,
+      "shelf": false,
+      "pinned": true
+    },
+    {
+      "id": "app-reddit",
+      "name": "Reddit",
+      "icon": "👽",
+      "type": "web",
+      "url": "https://www.reddit.com",
+      "shelf": false,
+      "pinned": false
+    },
+    {
+      "id": "app-x",
+      "name": "X",
+      "icon": "𝕏",
+      "type": "web",
+      "url": "https://x.com",
+      "shelf": false,
+      "pinned": false
+    },
+    {
+      "id": "app-netflix",
+      "name": "Netflix",
+      "icon": "🎬",
+      "type": "web",
+      "url": "https://www.netflix.com",
+      "cloak": true,
+      "shelf": false,
+      "pinned": false
+    },
+    {
+      "id": "app-desmos",
+      "name": "Desmos",
+      "icon": "📐",
+      "type": "web",
+      "url": "https://www.desmos.com/calculator",
+      "shelf": false,
+      "pinned": false
+    },
+    {
+      "id": "app-codepen",
+      "name": "CodePen",
+      "icon": "✎",
+      "type": "web",
+      "url": "https://codepen.io",
+      "shelf": false,
+      "pinned": false
+    },
+    {
+      "id": "app-archive",
+      "name": "Internet Archive",
+      "icon": "📚",
+      "type": "web",
+      "url": "https://archive.org",
+      "shelf": false,
+      "pinned": false
+    },
+    {
+      "id": "app-github",
+      "name": "GitHub",
+      "icon": "🐙",
+      "type": "web",
+      "url": "https://github.com",
+      "shelf": false,
+      "pinned": false
+    },
+    {
+      "id": "app-store",
+      "name": "Microsoft Store",
+      "icon": "🛍️",
+      "type": "store",
+      "shelf": false,
+      "pinned": true
+    }
+  ]
+}
